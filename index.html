@@ -59,26 +59,26 @@
     <script>
         const countdownElement = document.getElementById('countdown');
 
-        // Establece la duración del conteo regresivo en minutos
-        const countdownDurationMinutes = 1; // 1 minuto
-
-        // Establece el tiempo objetivo en el almacenamiento local si no está configurado
-        if (!localStorage.getItem('countdownEndTime')) {
-            const endTime = new Date().getTime() + countdownDurationMinutes * 60 * 1000; // 1 minuto en milisegundos
-            localStorage.setItem('countdownEndTime', endTime);
-        }
+        // Configura la fecha y hora de finalización del conteo regresivo (en UTC)
+        const targetDate = new Date('2024-09-05T22:00:00Z').getTime();
 
         const updateCountdown = () => {
-            const endTime = parseInt(localStorage.getItem('countdownEndTime'), 10);
-            const currentTime = new Date().getTime();
-            const distance = endTime - currentTime;
+
+         // Obtener la hora actual desde una API pública de tiempo
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+            const now = new Date();
+            // Convert current time to UTC-5 (Bogotá time)
+            const bogotaTime = new Date(now.toLocaleString("en-US", {timeZone: "America/Bogota"})).getTime();
+            const distance = targetDate - bogotaTime;
 
             if (distance < 0) {
-                countdownElement.innerHTML = '¡Cristobal!';
-                localStorage.removeItem('countdownEndTime'); // Limpia el tiempo al finalizar
+                clearInterval(interval);
+                document.body.classList.add('background');
+                countdownElement.innerHTML = '¡Nombre Bebe!';
                 return;
             }
-
+            
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
