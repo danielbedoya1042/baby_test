@@ -15,19 +15,40 @@
             margin: 0;
             font-family: 'Baloo 2', cursive;
             background-color: white;
+            overflow: hidden; /* Asegura que las animaciones no creen barras de desplazamiento */
         }
         .countdown {
             font-size: 3em;
-            color: #a88fe5; /* Rosa brillante */
-            text-shadow: 2px 2px #7f60cb; /* Sombra en color rosa claro */
+            color: #a88fe5;
+            text-shadow: 2px 2px #7f60cb;
+            position: relative;
         }
         .background {
             background-color: #dcebf1;
         }
+        .bottle {
+            position: absolute;
+            width: 100px; /* Ajusta el tamaño según sea necesario */
+            height: auto;
+            animation: float 5s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-30px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="countdown" id="countdown"></div>
+    <div class="countdown" id="countdown">
+        <img src="baby.jpeg" class="bottle" alt="Tetero" />
+    </div>
     <script>
         const countdownElement = document.getElementById('countdown');
 
@@ -55,7 +76,7 @@
                 if (distance < 0) {
                     clearInterval(interval);
                     document.body.classList.add('background');
-                    countdownElement.innerHTML = '¡Nombre Bebe!';
+                    countdownElement.innerHTML = '<img src="baby.jpeg" class="bottle" alt="Tetero" /> ¡Nombre Bebe!';
                     return;
                 }
 
@@ -63,7 +84,7 @@
                 const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                countdownElement.innerHTML = hours + 'Horas: ' + minutes + 'Minutos: ' + seconds + 'Segundos: ';
+                countdownElement.innerHTML = hours + ' Horas: ' + minutes + ' Minutos: ' + seconds + ' Segundos: ';
             } catch (error) {
                 console.error('Error fetching time:', error);
                 countdownElement.innerHTML = 'Error fetching time';
