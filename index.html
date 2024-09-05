@@ -59,18 +59,23 @@
     <script>
         const countdownElement = document.getElementById('countdown');
 
-        // Configura el número de horas para el conteo regresivo
-        const totalHours = 10; // Cambia este valor a la cantidad de horas que desees
+        // Establece la duración del conteo regresivo en horas
+        const countdownDurationHours = 10; // Cambia este valor a la cantidad de horas que desees
 
-        // Calcula la fecha y hora objetivo basada en el número de horas
-        const targetDate = new Date().getTime() + totalHours * 60 * 60 * 1000;
+        // Establece el tiempo objetivo en el almacenamiento local si no está configurado
+        if (!localStorage.getItem('countdownEndTime')) {
+            const endTime = new Date().getTime() + countdownDurationHours * 60 * 60 * 1000;
+            localStorage.setItem('countdownEndTime', endTime);
+        }
 
         const updateCountdown = () => {
+            const endTime = parseInt(localStorage.getItem('countdownEndTime'), 10);
             const currentTime = new Date().getTime();
-            const distance = targetDate - currentTime;
+            const distance = endTime - currentTime;
 
             if (distance < 0) {
                 countdownElement.innerHTML = '¡Cristonal!';
+                localStorage.removeItem('countdownEndTime'); // Limpia el tiempo al finalizar
                 return;
             }
 
