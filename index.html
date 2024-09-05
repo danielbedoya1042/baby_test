@@ -18,11 +18,11 @@
         }
         .countdown {
             font-size: 3em;
-            color: #ff69b4; /* Rosa brillante */
-            text-shadow: 2px 2px #ffb6c1; /* Sombra en color rosa claro */
+            color: #a88fe5; /* Rosa brillante */
+            text-shadow: 2px 2px #7f60cb; /* Sombra en color rosa claro */
         }
         .background {
-            background-color: lightblue;
+            background-color: #dcebf1;
         }
     </style>
 </head>
@@ -32,7 +32,7 @@
         const countdownElement = document.getElementById('countdown');
 
         // Configura la fecha y hora de finalización del conteo regresivo (en UTC)
-        const targetDate = new Date('2024-09-05T22:00:00Z').getTime();
+        const targetDate = new Date('2024-09-05T18:00:00Z').getTime();
 
         const updateCountdown = async () => {
             try {
