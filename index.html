@@ -60,7 +60,7 @@
         const countdownElement = document.getElementById('countdown');
 
         // Configura la fecha y hora de finalización del conteo regresivo en UTC
-        const targetDate = new Date('2024-09-05T21:25:00Z').getTime();
+        const targetDate = new Date('2024-09-05T21:13:00Z').getTime();
 
         const updateCountdown = () => {
             // Obtiene la hora actual en UTC
@@ -76,11 +76,12 @@
                 countdownElement.innerHTML = '¡Nombre Bebe!';
                 return;
             }
-            
+
+            const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            countdownElement.innerHTML = `${minutes} Minutos ${seconds} Segundos `;
+            countdownElement.innerHTML = `${hours} Horas ${minutes} Minutos ${seconds} Segundos`;
         };
 
         // Actualiza el conteo cada segundo
