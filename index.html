@@ -14,12 +14,12 @@
             height: 100vh;
             margin: 0;
             font-family: 'Baloo 2', cursive;
-            background-color: #eaecd6;
+            background-color: white;
         }
         .countdown {
             font-size: 3em;
-            color: #e1b75d; /* Rosa brillante */
-            text-shadow: 2px 2px #d6aa4d; /* Sombra en color rosa claro */
+            color: #ff69b4; /* Rosa brillante */
+            text-shadow: 2px 2px #ffb6c1; /* Sombra en color rosa claro */
         }
         .background {
             background-color: lightblue;
@@ -31,9 +31,8 @@
     <script>
         const countdownElement = document.getElementById('countdown');
 
-        // Configura la fecha y hora de finalización del conteo regresivo (en Bogotá)
-        // UTC-5:00 for Bogotá
-        const targetDate = new Date('2024-09-06T15:30:00Z').getTime();
+        // Configura la fecha y hora de finalización del conteo regresivo (en UTC)
+        const targetDate = new Date('2024-09-05T22:00:00Z').getTime();
 
         const updateCountdown = async () => {
             try {
@@ -47,7 +46,7 @@
                 if (distance < 0) {
                     clearInterval(interval);
                     document.body.classList.add('background');
-                    countdownElement.innerHTML = '¡Cristobal!';
+                    countdownElement.innerHTML = '¡Nombre Bebe!';
                     return;
                 }
 
