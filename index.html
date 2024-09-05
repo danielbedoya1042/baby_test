@@ -42,19 +42,9 @@
                     throw new Error('Network response was not ok');
                 }
                 const data = await response.json();
-                
-                // Convertir el UTC datetime a milisegundos desde la época
-                const currentBogotaTime = new Date(data.utc_datetime).getTime();
-                console.log(targetDate)
-                console.log(currentBogotaTime)
+                const currentBogotaTime = new Date(data.utc_datetime).getTime() + (data.raw_offset * 1000);
 
-                // La diferencia entre la hora de Bogotá y la UTC en milisegundos
-                const bogotaOffset = data.raw_offset * 1000;
-                const currentTimeInBogota = currentBogotaTime + bogotaOffset;
-
-                const distance = targetDate - currentTimeInBogota;
-
-                console.log("distance ", distance)
+                const distance = targetDate - currentBogotaTime;
 
                 if (distance < 0) {
                     clearInterval(interval);
@@ -74,4 +64,8 @@
             }
         };
 
-    
+        const interval = setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>
