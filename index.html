@@ -49,6 +49,9 @@
                 transform: translateY(0);
             }
         }
+        .background{
+            background-color: #78b8f9;
+        }
     </style>
 </head>
 <body>
@@ -73,6 +76,7 @@
 
             if (distance < 0) {
                 clearInterval(interval);
+                document.body.classList.add('background');
                 countdownElement.innerHTML = '¡Cristobal!';
                 return;
             }
