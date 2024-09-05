@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Countdown Timer</title>
+    <title>Countdown Page</title>
     <style>
         body {
             display: flex;
@@ -12,41 +12,41 @@
             height: 100vh;
             margin: 0;
             font-family: Arial, sans-serif;
-            transition: background-color 1s ease;
+            background-color: white;
         }
         .countdown {
-            font-size: 48px;
+            font-size: 3em;
         }
     </style>
 </head>
 <body>
     <div class="countdown" id="countdown"></div>
-
     <script>
-        // Set the date we're counting down to
-        var countDownDate = new Date().getTime() + 10000; // 10 seconds from now
+        const countdownElement = document.getElementById('countdown');
 
-        // Update the count down every 1 second
-        var x = setInterval(function() {
-            // Get today's date and time
-            var now = new Date().getTime();
+        // Configura la fecha y hora de finalización del conteo regresivo (fija)
+        const targetDate = new Date('2024-09-08T12:00:00Z').getTime();
 
-            // Find the distance between now and the count down date
-            var distance = countDownDate - now;
+        const updateCountdown = () => {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
 
-            // Time calculations for days, hours, minutes and seconds
-            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            // Output the result in an element with id="countdown"
-            document.getElementById("countdown").innerHTML = seconds + "s ";
-
-            // If the count down is over, write some text 
             if (distance < 0) {
-                clearInterval(x);
-                document.getElementById("countdown").innerHTML = "EXPIRED";
-                document.body.style.backgroundColor = "#FF6347"; // Tomato color
+                clearInterval(interval);
+                document.body.style.backgroundColor = 'lightblue';
+                countdownElement.innerHTML = '¡Tiempo terminado!';
+                return;
             }
-        }, 1000);
+
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            countdownElement.innerHTML = hours + 'h ' + minutes + 'm ' + seconds + 's ';
+        };
+
+        const interval = setInterval(updateCountdown, 1000);
+        updateCountdown();
     </script>
 </body>
 </html>
