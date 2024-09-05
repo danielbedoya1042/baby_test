@@ -5,17 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Countdown Page</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Baloo+2&display=swap');
+        
         body {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            font-family: Arial, sans-serif;
+            font-family: 'Baloo 2', cursive;
             background-color: white;
         }
         .countdown {
             font-size: 3em;
+            color: #ff69b4; /* Rosa brillante */
+            text-shadow: 2px 2px #ffb6c1; /* Sombra en color rosa claro */
+        }
+        .background {
+            background-color: lightblue;
         }
     </style>
 </head>
@@ -36,8 +43,8 @@
 
             if (distance < 0) {
                 clearInterval(interval);
-                document.body.style.backgroundColor = 'lightblue';
-                countdownElement.innerHTML = '¡Nombre Bebe!';
+                document.body.classList.add('background');
+                countdownElement.innerHTML = '¡Cristobal!';
                 return;
             }
 
