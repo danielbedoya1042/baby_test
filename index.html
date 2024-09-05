@@ -25,6 +25,8 @@
             font-size: 3em;
             color: #a88fe5;
             text-shadow: 2px 2px #7f60cb;
+            position: relative;
+            z-index: 1; /* Asegura que el conteo esté sobre la imagen del bebé */
         }
         .background {
             background-color: #dcebf1;
@@ -37,6 +39,7 @@
             width: 100px; /* Ajusta el tamaño según sea necesario */
             height: auto;
             animation: float 5s ease-in-out infinite;
+            z-index: 0; /* Asegura que la imagen esté debajo del conteo */
         }
         @keyframes float {
             0% {
@@ -64,4 +67,4 @@
 
         const updateCountdown = async () => {
             try {
-                // Obtene
+                // Obtener la hora actual desde la API de World Time (us
