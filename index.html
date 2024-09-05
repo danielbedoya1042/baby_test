@@ -36,15 +36,15 @@
 
         const updateCountdown = async () => {
             try {
-                // Obtener la hora actual desde una API pública de tiempo
-                const response = await fetch('http://worldclockapi.com/api/json/utc/now');
+                // Obtener la hora actual desde la API de World Time
+                const response = await fetch('http://worldtimeapi.org/api/timezone/America/Bogota');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
                 const data = await response.json();
-                const currentUtcTime = new Date(data.currentDateTime).getTime();
+                const currentBogotaTime = new Date(data.utc_datetime).getTime() + (data.raw_offset * 1000);
 
-                const distance = targetDate - currentUtcTime;
+                const distance = targetDate - currentBogotaTime;
 
                 if (distance < 0) {
                     clearInterval(interval);
