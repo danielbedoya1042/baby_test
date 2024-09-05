@@ -24,12 +24,15 @@
     <script>
         const countdownElement = document.getElementById('countdown');
 
-        // Configura la fecha y hora de finalización del conteo regresivo (fija)
+        // Configura la fecha y hora de finalización del conteo regresivo (en Bogotá)
+        // UTC-5:00 for Bogotá
         const targetDate = new Date('2024-09-05T14:00:00Z').getTime();
 
         const updateCountdown = () => {
-            const now = new Date().getTime();
-            const distance = targetDate - now;
+            const now = new Date();
+            // Convert current time to UTC-5 (Bogotá time)
+            const bogotaTime = new Date(now.toLocaleString("en-US", {timeZone: "America/Bogota"})).getTime();
+            const distance = targetDate - bogotaTime;
 
             if (distance < 0) {
                 clearInterval(interval);
