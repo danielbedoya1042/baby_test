@@ -59,22 +59,20 @@
     <script>
         const countdownElement = document.getElementById('countdown');
 
-        // Configura la fecha y hora de finalización del conteo regresivo (en UTC)
+        // Configura la fecha y hora de finalización del conteo regresivo en UTC
         const targetDate = new Date('2024-09-05T22:00:00Z').getTime();
 
         const updateCountdown = () => {
-
-         // Obtener la hora actual desde una API pública de tiempo
-            const now = new Date().getTime();
-            const distance = targetDate - now;
+            // Obtiene la hora actual en UTC
             const now = new Date();
-            // Convert current time to UTC-5 (Bogotá time)
-            const bogotaTime = new Date(now.toLocaleString("en-US", {timeZone: "America/Bogota"})).getTime();
+            const currentTimeInUtc = now.getTime();
+            
+            // Convertir el tiempo actual a la zona horaria de Bogotá
+            const bogotaTime = new Date(now.toLocaleString("en-US", { timeZone: "America/Bogota" })).getTime();
             const distance = targetDate - bogotaTime;
 
             if (distance < 0) {
                 clearInterval(interval);
-                document.body.classList.add('background');
                 countdownElement.innerHTML = '¡Nombre Bebe!';
                 return;
             }
